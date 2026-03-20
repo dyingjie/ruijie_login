@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+config.json
+.env
+.env.*
+*.local
+*.pem
+*.key
+*.p12
+*.pfx

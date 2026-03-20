@@ -1,0 +1,8 @@
+{
+  "portal_url": "http://portal.example.com/eportal/index.jsp?wlanuserip=example&mac=example&t=wireless-v2",
+  "username": "your-username",
+  "password": "your-password",
+  "service": "",
+  "timeout_seconds": 20,
+  "use_portal_prefix": false
+}
