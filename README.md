@@ -162,21 +162,37 @@ python -m ruijie_login --config my-config.json status
 
 说明你只填了登录页路径，没有填 `?` 后面的查询参数。这个项目依赖这些参数完成认证。
 
-### `run.bat` 提示找不到 Python
+### `run.bat` 或任务计划程序提示找不到 Python / 返回 `0x1`
 
-`run.bat` 默认会查找：
+现在的 `run.bat` 和 `status.bat` 会按以下顺序查找 Python：
 
 ```text
-%USERPROFILE%\miniconda3\envs\ruijie\python.exe
+1. 任务中显式传入的 PYTHON_EXE
+2. 项目目录下的 .venv\Scripts\python.exe 或 venv\Scripts\python.exe
+3. 常见的 conda / 本机 Python 安装位置
+4. PATH 中可用的 py -3 或 python
 ```
 
-如果你的 Python 不在这个位置，请直接使用：
+如果你的 Python 不在这些位置，请直接使用：
 
 ```powershell
 python -m ruijie_login
 ```
 
-或者按自己的环境修改批处理文件。
+或者在任务计划程序里显式设置 `PYTHON_EXE`。
+
+任务计划程序里只看到 `0x1` 时，请优先检查：
+
+- “起始于(Start in)” 是否设置为项目根目录
+- 任务运行账号是否就是你当前的 Windows 用户
+- `logs\` 目录下最新生成的 `run-*.log` 或 `status-*.log` 里的实际报错
+
+一个更稳妥的任务计划程序配置方式：
+
+- 程序或脚本: `cmd.exe`
+- 添加参数: `/c run.bat`
+- 起始于: 项目根目录绝对路径
+- 如果解释器不在常见位置，在任务里加环境变量 `PYTHON_EXE=C:\你的路径\python.exe`
 
 ## 限制
 

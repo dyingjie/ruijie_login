@@ -8,3 +8,5 @@ config.json
 *.key
 *.p12
 *.pfx
+logs/
+*.log
